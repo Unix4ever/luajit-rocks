@@ -1,12 +1,18 @@
 local site_config = {}
+function script_path()
+   local str = debug.getinfo(2, "S").source:sub(2)
+   return str:match("(.*/)")
+end
 
-site_config.LUAROCKS_PREFIX=[[@CMAKE_INSTALL_PREFIX@/@INSTALL_PREFIX_SUBDIR@]]
-site_config.LUA_INCDIR=[[@CMAKE_INSTALL_PREFIX@/@INSTALL_INCLUDE_SUBDIR@]]
-site_config.LUA_LIBDIR=[[@CMAKE_INSTALL_PREFIX@/@INSTALL_LIB_SUBDIR@]]
-site_config.LUA_BINDIR=[[@CMAKE_INSTALL_PREFIX@/@INSTALL_BIN_SUBDIR@]]
-site_config.LUA_INTERPRETER = [[@LUA_EXE_NAME@]]
-site_config.LUAROCKS_SYSCONFDIR=[[@CMAKE_INSTALL_PREFIX@/@INSTALL_LUAROCKS_SYSCONF_SUBDIR@]]
-site_config.LUAROCKS_ROCKS_TREE=[[@CMAKE_INSTALL_PREFIX@/@INSTALL_PREFIX_SUBDIR@]]
+local run_prefix = run_prefix or script_path() .. '../../../../'
+
+site_config.LUAROCKS_PREFIX=run_prefix..[[@INSTALL_PREFIX_SUBDIR@]]
+site_config.LUA_INCDIR=run_prefix..[[@INSTALL_INCLUDE_SUBDIR@]]
+site_config.LUA_LIBDIR=run_prefix..[[@INSTALL_LIB_SUBDIR@]]
+site_config.LUA_BINDIR=run_prefix..[[@INSTALL_BIN_SUBDIR@]]
+site_config.LUA_INTERPRETER = run_prefix..[[@LUA_EXE_NAME@]]
+site_config.LUAROCKS_SYSCONFDIR=run_prefix..[[@INSTALL_LUAROCKS_SYSCONF_SUBDIR@]]
+site_config.LUAROCKS_ROCKS_TREE=run_prefix..[[@INSTALL_PREFIX_SUBDIR@]]
 site_config.LUAROCKS_ROCKS_SUBDIR=[[@INSTALL_LUAROCKS_ROCKS_SUBDIR@]]
 site_config.LUA_DIR_SET = true
 site_config.LUAROCKS_UNAME_S=[[@CMAKE_SYSTEM_NAME@]]
