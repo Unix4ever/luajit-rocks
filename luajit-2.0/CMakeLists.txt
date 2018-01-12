@@ -355,6 +355,10 @@ SET(DEPS
 ## COMPILE
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR} dynasm src)
 
+if(WIN32)
+  include_directories(BEFORE "${CMAKE_CURRENT_BINARY_DIR}\\..")
+endif(WIN32)
+
 IF(WITH_AMALG)
   add_library(libluajit SHARED src/ljamalg.c ${DEPS} )
   add_library(luajit-static STATIC src/ljamalg.c ${DEPS} )
