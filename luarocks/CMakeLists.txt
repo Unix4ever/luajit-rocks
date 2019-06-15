@@ -38,6 +38,7 @@ IF(WIN32)
     win32/tools/rmdir.exe
     win32/tools/test.exe
     win32/tools/uname.exe
+    win32/tools/vswhere.exe
     win32/tools/wget.exe)
 
   INSTALL(PROGRAMS ${WINUTILS_EXE_FILES} DESTINATION "${INSTALL_BIN_SUBDIR}/tools/")
